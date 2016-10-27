@@ -6,5 +6,6 @@
     <string name="activity_sub1">Sub Activity 1</string>
     <string name="activity_sub2">Sub Activity 2</string>
 
-    <string name="shortcut_main2_uri">Uri</string>
+    <string name="shortcut_main2_uri_label">Github link</string>
+    <string name="shortcut_main2_uri_link">https://github.com/rockgecko-development/NShortcutBugs</string>
 </resources>

@@ -9,6 +9,7 @@
         android:shortcutShortLabel="@string/activity_main1"
         android:shortcutLongLabel="@string/activity_main1"
         >
+        <!-- Android issue 226188: target package does not work as string resource -->
         <intent
             android:action="android.intent.action.MAIN"
             android:targetPackage="@string/app_package"
@@ -23,10 +24,12 @@
         android:shortcutShortLabel="@string/activity_sub1"
         android:shortcutLongLabel="@string/activity_sub1"
         >
+        <!-- Android issue 226188: target package does not work as string resource -->
         <intent
             android:action="android.intent.action.MAIN"
             android:targetPackage="@string/app_package"
             android:targetClass="com.rockgecko.nshortcutbugs.MainActivity1" />
+        <!-- Action Launcher issue: On pressing back, MainActivity1 should appear -->
         <intent
             android:action="android.intent.action.VIEW"
             android:targetPackage="@string/app_package"

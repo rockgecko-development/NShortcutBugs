@@ -19,7 +19,7 @@
     <shortcut
         android:shortcutId="main2_sub2"
         android:enabled="true"
-        android:icon="@drawable/ic_view_grid_white_36dp"
+        android:icon="@drawable/ic_view_list_white_36dp"
         android:shortcutShortLabel="@string/activity_sub2"
         android:shortcutLongLabel="@string/activity_sub2"
         >
@@ -27,6 +27,7 @@
             android:action="android.intent.action.MAIN"
             android:targetPackage="com.rockgecko.nshortcutbugs.flavour1"
             android:targetClass="com.rockgecko.nshortcutbugs.MainActivity2" />
+        <!-- Action Launcher issue: On pressing back, MainActivity2 should appear -->
         <intent
             android:action="android.intent.action.VIEW"
             android:targetPackage="com.rockgecko.nshortcutbugs.flavour1"
@@ -37,12 +38,13 @@
         android:shortcutId="main2_uri"
         android:enabled="true"
         android:icon="@drawable/ic_github_circle_36dp"
-        android:shortcutShortLabel="@string/shortcut_main2_uri"
-        android:shortcutLongLabel="@string/shortcut_main2_uri"
+        android:shortcutShortLabel="@string/shortcut_main2_uri_label"
+        android:shortcutLongLabel="@string/shortcut_main2_uri_label"
         >
+        <!-- Android issue 226188: data uris also do not work as string resources -->
         <intent
             android:action="android.intent.action.VIEW"
-            android:data="http://github.com"
+            android:data="@string/shortcut_main2_uri_link"
              />
 
         <categories android:name="android.shortcut.conversation" />
