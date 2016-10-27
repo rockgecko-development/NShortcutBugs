@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android" tools:targetApi="n_mr1">
+
+    <shortcut
+        android:shortcutId="main1"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_white_36dp"
+        android:shortcutShortLabel="@string/activity_main1"
+        android:shortcutLongLabel="@string/activity_main1"
+        >
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="@string/app_package"
+            android:targetClass="com.rockgecko.nshortcutbugs.MainActivity1" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="main1_sub1"
+        android:enabled="true"
+        android:icon="@drawable/ic_view_grid_white_36dp"
+        android:shortcutShortLabel="@string/activity_sub1"
+        android:shortcutLongLabel="@string/activity_sub1"
+        >
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="@string/app_package"
+            android:targetClass="com.rockgecko.nshortcutbugs.MainActivity1" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="@string/app_package"
+            android:targetClass="com.rockgecko.nshortcutbugs.SubActivity1" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+
+</shortcuts>

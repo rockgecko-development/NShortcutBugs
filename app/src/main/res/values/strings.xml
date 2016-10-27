@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">NShortcutBugs</string>
+
+    <string name="activity_main1">NShortcut 1</string>
+    <string name="activity_main2">NShortcut 2</string>
+    <string name="activity_sub1">Sub Activity 1</string>
+    <string name="activity_sub2">Sub Activity 2</string>
+
+    <string name="shortcut_main2_uri">Uri</string>
+</resources>
