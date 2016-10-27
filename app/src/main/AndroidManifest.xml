@@ -38,6 +38,10 @@
             <meta-data android:name="android.app.shortcuts"
                 android:resource="@xml/shortcut_2" />
         </activity>
+        <activity android:name=".ShortcutManagerDebugActivity"
+            android:label="@string/activity_shortcutmanager_debug"
+            >
+        </activity>
     </application>
 
 </manifest>

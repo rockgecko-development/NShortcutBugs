@@ -10,7 +10,7 @@ public class MainActivity2 extends BaseActivity {
     @Override
     protected String getDescription() {
         String msg="";
-        if(getIntent().getCategories().contains(Intent.CATEGORY_LAUNCHER)){
+        if(getIntent().getCategories()!=null && getIntent().getCategories().contains(Intent.CATEGORY_LAUNCHER)){
             msg = "Launched directly\n";
         }
 

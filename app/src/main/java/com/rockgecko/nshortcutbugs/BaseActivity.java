@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 public abstract class BaseActivity extends Activity {
 
     @Override
@@ -16,7 +18,7 @@ public abstract class BaseActivity extends Activity {
     }
     protected void doInfoText(){
         TextView textView = (TextView) findViewById(R.id.text1);
-        String text = String.format("Activity: %s\n%s\nFlavour: %s\nIntent:\n%s\n\n%s", getClass().getSimpleName(), getPackageName(), BuildConfig.FLAVOR, getIntent(), getDescription());
+        String text = String.format(Locale.getDefault(),"Activity: %s\n%s\nBuild %d Flavour: %s\nIntent:\n%s\n\n%s", getClass().getSimpleName(), getPackageName(), BuildConfig.VERSION_CODE, BuildConfig.FLAVOR, getIntent(), getDescription());
         textView.setText(text);
     }
     protected abstract String getDescription();
