@@ -40,6 +40,9 @@ public class MainActivity1 extends BaseActivity {
                     new AlertDialog.Builder(this).setMessage("ShortcutManager API requires Android 7.1").setPositiveButton("OK",null).show();
                 }
                 return true;
+            case R.id.activity_preferences_debug:
+                startActivity(new Intent(this, PreferencesDebugActivity.class));
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

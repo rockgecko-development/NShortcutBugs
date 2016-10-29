@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/activity_preferences_debug">
+     <PreferenceCategory android:key="pref_key_shortcut_1"
+        android:title="Main 1"
+        >
+		
+
+		
+		 <Preference
+        android:key="main1_sub1"
+        android:enabled="true"
+        android:icon="@drawable/ic_view_grid_white_36dp"
+        android:title="@string/activity_sub1"        
+        >
+        <!-- Android issue 226188: target package does work as string resource when defined in preferences-->        
+        <intent
+            android:action="com.rockgecko.nshotcutbugs.ACTION_FROM_PREFERENCES"
+            android:targetPackage="@string/app_package"
+            android:targetClass="com.rockgecko.nshortcutbugs.SubActivity1" />
+        
+    </Preference>
+</PreferenceCategory>
+
+ <PreferenceCategory android:key="pref_key_shortcut_2"
+        android:title="Main 2"
+        >
+
+
+    <Preference
+        android:key="main2_sub2"
+        android:enabled="true"
+        android:icon="@drawable/ic_view_list_white_36dp"
+        android:title="@string/activity_sub2"
+        >
+        
+        <intent
+            android:action="com.rockgecko.nshotcutbugs.ACTION_FROM_PREFERENCES"
+            android:targetPackage="com.rockgecko.nshortcutbugs.flavour1"
+            android:targetClass="com.rockgecko.nshortcutbugs.SubActivity2" />
+    </Preference>
+    <Preference
+        android:key="main2_uri"
+        android:enabled="true"
+        android:icon="@drawable/ic_github_circle_36dp"
+        android:title="@string/shortcut_main2_uri_label"        
+        >
+        <!-- Android issue 226188: data uris also do work as string resources when defined in preferences -->
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/shortcut_main2_uri_link"
+             />
+        
+    </Preference>
+     <Preference
+         android:key="main2_chrome"
+         android:enabled="true"
+         android:icon="@android:drawable/ic_menu_upload_you_tube"
+         android:title="Launch Chrome"
+         android:summary="Explicitly launch Chrome, without a URI, by specifying targetPackage and targetClass"
+         >
+         <!-- you can even specify icons that aren't yours -->
+         <!-- Android issue 226188: you can specify an intent with a targetPackage that isn't yours, as a string resource -->
+         <intent
+
+             android:targetPackage="@string/shortcut_main2_chrome_package"
+             android:targetClass="@string/shortcut_main2_chrome_target_class"
+             />
+
+     </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

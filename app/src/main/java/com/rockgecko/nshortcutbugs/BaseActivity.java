@@ -8,6 +8,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 public abstract class BaseActivity extends Activity {
+    public static final String ACTION_FROM_PREFERENCES = "com.rockgecko.nshotcutbugs.ACTION_FROM_PREFERENCES";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

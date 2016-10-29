@@ -42,6 +42,10 @@
             android:label="@string/activity_shortcutmanager_debug"
             >
         </activity>
+        <activity android:name=".PreferencesDebugActivity"
+            android:label="@string/activity_preferences_debug"
+            >
+        </activity>
     </application>
 
 </manifest>
