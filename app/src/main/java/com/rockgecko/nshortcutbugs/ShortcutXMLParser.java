@@ -108,6 +108,7 @@ public class ShortcutXMLParser {
         builder.setIcon(Icon.createWithResource(mContext, icon));
 
         //enabled
+        //Android Issue 229163 nable to use boolean resource for enabled attribute
         String enabledId = xpp.getAttributeValue(NAMESPACE_ANDROID, "enabled");
         if(enabledId!=null){
             boolean enabledBool = resourceIdToBool(enabledId);

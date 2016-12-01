@@ -37,7 +37,7 @@
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 
-    <!-- Android issue xx: enabled is not parsed correctly  -->
+    <!-- Android issue 229163: enabled is not parsed correctly  -->
     <!-- Action Launcher issue: enabled is not parsed correctly  -->
     <shortcut
         android:shortcutId="main1_enabled_bool"
@@ -54,7 +54,7 @@
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 
-    <!-- Android issue xx: enabled is not parsed correctly  -->
+    <!-- Android issue 229163: enabled is not parsed correctly  -->
     <!-- Action Launcher issue: enabled is not parsed correctly  -->
     <shortcut
         android:shortcutId="main1_disabled_bool"

@@ -49,10 +49,12 @@ public class ShortcutManagerDebugActivity extends Activity{
 
             Intent[] myIntents = myParsedShortcut.getIntents();
             Intent mySubActivity2Intent =  myIntents[myIntents.length-1];
+            //Android Issue 225754 and 226188 unable to specify android:targetPackage as string resource
             msg+="MyIntent:\n"+mySubActivity2Intent;
             msg+="\n"+assertEq("Target Package", getPackageName(), mySubActivity2Intent.getComponent()==null?null:mySubActivity2Intent.getComponent().getPackageName());
             msg+="\n"+assertEq("Target Class", SubActivity1.class.getName(), mySubActivity2Intent.getComponent()==null?null:mySubActivity2Intent.getComponent().getClassName());
 
+            //Android Issue 229163 unable to use boolean resource for enabled attribute
             //main1_enabled_bool
             systemParsedShortcut = findManifestShortcut(sm.getManifestShortcuts(), "main1_enabled_bool");
             myParsedShortcut = findManifestShortcut(myShortcutInfos, "main1_enabled_bool");
@@ -67,6 +69,7 @@ public class ShortcutManagerDebugActivity extends Activity{
                         myParsedIntent.getComponent()==null?null:myParsedIntent.getComponent().getPackageName());
             }
 
+            //Android Issue 229163 unable to use boolean resource for enabled attribute
             //main1_disabled_bool
             systemParsedShortcut = findManifestShortcut(sm.getManifestShortcuts(), "main1_disabled_bool");
             myParsedShortcut = findManifestShortcut(myShortcutInfos, "main1_disabled_bool");
@@ -90,6 +93,7 @@ public class ShortcutManagerDebugActivity extends Activity{
 
         ShortcutInfo main2_uri = findManifestShortcut(sm.getManifestShortcuts(), "main2_uri");
 
+        //Android Issue 225754 and 226188 unable to specify android:data as string resource
         Intent[] main2_uri_intents = main2_uri.getIntents();
         Intent main2_uri_intent =  main2_uri_intents[main2_uri_intents.length-1];
         msg+="\n\nSystem read main2_uri. Intent:\n"+main2_uri_intent;

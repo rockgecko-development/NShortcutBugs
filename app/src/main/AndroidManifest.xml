@@ -29,7 +29,7 @@
             android:icon="@drawable/ic_view_list_white_36dp"
             android:exported="true">
         </activity>
-        <!-- Android issue xx: specifying bool resource always works correctly in manifest -->
+        <!-- Android issue 229163: specifying bool resource always works correctly in manifest -->
         <activity
             android:enabled="@bool/i_am_true"
             android:name=".MainActivity2"

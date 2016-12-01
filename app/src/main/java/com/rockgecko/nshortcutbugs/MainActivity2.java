@@ -24,7 +24,8 @@ public class MainActivity2 extends BaseActivity {
             msg = "Launched directly\n";
         }
 
-            msg += "Android issue 226188: This shortcut does work on 7.1 emulator, because targetPackage is specified directly";
+            msg += "Android issue 226188: This shortcut does work on 7.1 emulator, because targetPackage is specified directly\n";
+            msg += "Android issue 229162: Unable to disable pinned shortcut (see overflow menu)";
 
 
         return msg;
@@ -41,6 +42,7 @@ public class MainActivity2 extends BaseActivity {
             case R.id.disable_shortcut_main2:
                 String msg;
                 if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N_MR1){
+                    //issue 229162
                     ShortcutManager sm = getSystemService(ShortcutManager.class);
                     ShortcutInfo shortcut = ShortcutManagerDebugActivity.findManifestShortcut(sm.getManifestShortcuts(), "main2");
                     if(shortcut.isPinned()){
