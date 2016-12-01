@@ -46,7 +46,6 @@ public class MainActivity2 extends BaseActivity {
                     if(shortcut.isPinned()){
                         try{
                             List<String> list = new ArrayList<>();
-                            list.add(UUID.randomUUID().toString());
                             list.add(shortcut.getId());
                             sm.disableShortcuts(list);
                             msg="OK";
