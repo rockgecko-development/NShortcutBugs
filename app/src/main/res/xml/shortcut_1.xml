@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shortcuts xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android" tools:targetApi="n_mr1">
-
+<!-- Action Launcher issue: this entire file is ignored and replaced with shortcut_2 -->
     <shortcut
         android:shortcutId="main1"
         android:enabled="true"
@@ -37,5 +37,38 @@
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 
+    <!-- Android issue xx: enabled is not parsed correctly  -->
+    <!-- Action Launcher issue: enabled is not parsed correctly  -->
+    <shortcut
+        android:shortcutId="main1_enabled_bool"
+        android:enabled="@bool/i_am_true"
+        android:icon="@android:drawable/checkbox_on_background"
+        android:shortcutShortLabel="@string/activity_enabled_bool"
+        android:shortcutLongLabel="@string/activity_enabled_bool"
+        >
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.rockgecko.nshortcutbugs.flavour1"
+            android:targetClass="com.rockgecko.nshortcutbugs.ShortcutManagerDebugActivity" />
+
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <!-- Android issue xx: enabled is not parsed correctly  -->
+    <!-- Action Launcher issue: enabled is not parsed correctly  -->
+    <shortcut
+        android:shortcutId="main1_disabled_bool"
+        android:enabled="@bool/i_am_false"
+        android:icon="@android:drawable/checkbox_off_background"
+        android:shortcutShortLabel="@string/activity_disabled_bool"
+        android:shortcutLongLabel="@string/activity_disabled_bool"
+        >
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.rockgecko.nshortcutbugs.flavour1"
+            android:targetClass="com.rockgecko.nshortcutbugs.ShortcutManagerDebugActivity" />
+
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
 
 </shortcuts>

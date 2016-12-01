@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Disable Pinned Shortcut NShortcut 2" android:id="@+id/disable_shortcut_main2"/>
+
+	
+</menu>

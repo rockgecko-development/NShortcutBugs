@@ -106,6 +106,15 @@ public class ShortcutXMLParser {
         }
         else icon=0;
         builder.setIcon(Icon.createWithResource(mContext, icon));
+
+        //enabled
+        String enabledId = xpp.getAttributeValue(NAMESPACE_ANDROID, "enabled");
+        if(enabledId!=null){
+            boolean enabledBool = resourceIdToBool(enabledId);
+            //ShortcutInfo and ShortcutInfo.Builder don't have a method to setEnabled :(
+            //ignore.
+        }
+
         return builder;
     }
 
@@ -125,6 +134,20 @@ public class ShortcutXMLParser {
             String id = text.replace("@", "");
 
             return mContext.getString(Integer.parseInt(id));
+
+        }
+
+    }
+
+    protected boolean resourceIdToBool(String text){
+
+        if(!text.startsWith("@")){
+            return Boolean.parseBoolean(text);
+        } else {
+
+            String id = text.replace("@", "");
+
+            return mContext.getResources().getBoolean(Integer.parseInt(id));
 
         }
 

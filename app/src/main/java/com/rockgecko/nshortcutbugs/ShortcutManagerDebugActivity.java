@@ -33,9 +33,9 @@ public class ShortcutManagerDebugActivity extends Activity{
 
         TextView textView = (TextView) findViewById(R.id.text1);
         ShortcutManager sm = getSystemService(ShortcutManager.class);
-        ShortcutInfo shortcut = findManifestShortcut(sm.getManifestShortcuts(), "main1_sub1");
+        ShortcutInfo systemParsedShortcut = findManifestShortcut(sm.getManifestShortcuts(), "main1_sub1");
 
-        Intent[] intents = shortcut.getIntents();
+        Intent[] intents = systemParsedShortcut.getIntents();
         Intent subActivity2Intent =  intents[intents.length-1];
         String msg="System read main1_sub1. Intent:\n"+subActivity2Intent;
         msg+="\n"+assertEq("Target Package", getPackageName(), subActivity2Intent.getComponent()==null?null:subActivity2Intent.getComponent().getPackageName());
@@ -52,6 +52,34 @@ public class ShortcutManagerDebugActivity extends Activity{
             msg+="MyIntent:\n"+mySubActivity2Intent;
             msg+="\n"+assertEq("Target Package", getPackageName(), mySubActivity2Intent.getComponent()==null?null:mySubActivity2Intent.getComponent().getPackageName());
             msg+="\n"+assertEq("Target Class", SubActivity1.class.getName(), mySubActivity2Intent.getComponent()==null?null:mySubActivity2Intent.getComponent().getClassName());
+
+            //main1_enabled_bool
+            systemParsedShortcut = findManifestShortcut(sm.getManifestShortcuts(), "main1_enabled_bool");
+            myParsedShortcut = findManifestShortcut(myShortcutInfos, "main1_enabled_bool");
+            msg+="\n\nManual parsing main1_enabled_bool";
+            if(systemParsedShortcut==null) msg+="\nexpected:\nnot-null\nactual:\nnull";
+            else{
+                msg+="\n"+assertEq("enabled", systemParsedShortcut.isEnabled(), true);
+                msg+="\n"+assertEq("ShortLabel", systemParsedShortcut.getShortLabel(), myParsedShortcut.getShortLabel());
+                Intent systemIntent = systemParsedShortcut.getIntent();
+                Intent myParsedIntent = myParsedShortcut.getIntent();
+                msg+="\n"+assertEq("Target Package", systemIntent.getComponent()==null?null:systemIntent.getComponent().getPackageName(),
+                        myParsedIntent.getComponent()==null?null:myParsedIntent.getComponent().getPackageName());
+            }
+
+            //main1_disabled_bool
+            systemParsedShortcut = findManifestShortcut(sm.getManifestShortcuts(), "main1_disabled_bool");
+            myParsedShortcut = findManifestShortcut(myShortcutInfos, "main1_disabled_bool");
+            msg+="\n\nManual parsing main1_disabled_bool";
+            if(systemParsedShortcut==null) msg+="\nexpected:\nnot-null\nactual:\nnull";
+            else{
+                msg+="\n"+assertEq("enabled", systemParsedShortcut.isEnabled(), false);
+                msg+="\n"+assertEq("ShortLabel", systemParsedShortcut.getShortLabel(), myParsedShortcut.getShortLabel());
+                Intent systemIntent = systemParsedShortcut.getIntent();
+                Intent myParsedIntent = myParsedShortcut.getIntent();
+                msg+="\n"+assertEq("Target Package", systemIntent.getComponent()==null?null:systemIntent.getComponent().getPackageName(),
+                        myParsedIntent.getComponent()==null?null:myParsedIntent.getComponent().getPackageName());
+            }
 
 
         } catch (IOException | XmlPullParserException e) {
@@ -84,6 +112,7 @@ public class ShortcutManagerDebugActivity extends Activity{
             msg+=e.getMessage();
         }
 
+
         textView.setText(msg);
 
     }
@@ -97,7 +126,7 @@ public class ShortcutManagerDebugActivity extends Activity{
         }
     }
 
-    private ShortcutInfo findManifestShortcut(List<ShortcutInfo> list, String id){
+    static ShortcutInfo findManifestShortcut(List<ShortcutInfo> list, String id){
         for(ShortcutInfo s : list){
             if(Objects.equals(s.getId(), id))
                 return s;

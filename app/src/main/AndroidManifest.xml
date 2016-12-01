@@ -15,6 +15,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- Action Launcher issue: this file is overridden with shortcut_2 for both LAUNCHER activities -->
             <meta-data android:name="android.app.shortcuts"
                 android:resource="@xml/shortcut_1" />
         </activity>
@@ -28,7 +29,10 @@
             android:icon="@drawable/ic_view_list_white_36dp"
             android:exported="true">
         </activity>
-        <activity android:name=".MainActivity2"
+        <!-- Android issue xx: specifying bool resource always works correctly in manifest -->
+        <activity
+            android:enabled="@bool/i_am_true"
+            android:name=".MainActivity2"
             android:label="@string/activity_main2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
