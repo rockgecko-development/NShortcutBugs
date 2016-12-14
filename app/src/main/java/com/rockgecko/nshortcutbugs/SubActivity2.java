@@ -10,7 +10,7 @@ public class SubActivity2 extends BaseActivity {
         if(Objects.equals(ACTION_FROM_PREFERENCES, getIntent().getAction())) {
             msg = "Launched from preferences.\n";
             msg += "Android issue 226188: Target package also works when defined in preferences as com.rockgecko.nshortcutbugs.flavour1";
-            msg += "\nExtra extra_valid_key: "+getIntent().getExtras().getString("extra_valid_key");
+            msg += "\nAndroid issue 230209: lint incorrectly reports 'Element extra is not allowed here'\nExtra extra_valid_key: "+getIntent().getExtras().getString("extra_valid_key");
         }
         else {
             msg = "Launched from shortcut. Action Launcher issue: On pressing back, MainActivity2 should appear, as it is listed in shortcut_2xml id main2_sub2\n";

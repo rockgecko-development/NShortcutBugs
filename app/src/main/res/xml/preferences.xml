@@ -40,7 +40,7 @@
             android:targetPackage="com.rockgecko.nshortcutbugs.flavour1"
             android:targetClass="com.rockgecko.nshortcutbugs.SubActivity2"
             >
-            <!-- Android issue xx: lint incorrectly reports 'Element extra is not allowed here' -->
+            <!-- Android issue 230209: lint incorrectly reports 'Element extra is not allowed here' -->
             <extra android:name="extra_valid_key" android:value="valid value"/>
             </intent>
     </Preference>
