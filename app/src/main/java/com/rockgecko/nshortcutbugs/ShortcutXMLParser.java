@@ -4,9 +4,14 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
+import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Icon;
 import android.os.Build;
+import android.text.TextUtils;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.util.TypedValue;
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -21,6 +26,7 @@ import java.util.ArrayList;
 @TargetApi(Build.VERSION_CODES.N_MR1)
 public class ShortcutXMLParser {
     public static final String NAMESPACE_ANDROID = "http://schemas.android.com/apk/res/android";
+    private static final String TAG = "ShortcutXMLParser";
 
     
 
@@ -87,8 +93,17 @@ public class ShortcutXMLParser {
 
     }
 
-    protected ShortcutInfo.Builder parseItem(XmlResourceParser xpp) {
-        //android.R.attr.shortcutId
+    protected ShortcutInfo.Builder parseItem(XmlResourceParser xpp) throws IOException{
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N_MR1){
+            try {
+                return parseItemAPI25(xpp);
+            } catch (Exception e) {
+                throw new IOException(e);
+            }
+        }
+        return parseItemBase(xpp);
+    }
+    protected ShortcutInfo.Builder parseItemBase(XmlResourceParser xpp) {
         String shortcutId =xpp.getAttributeValue(NAMESPACE_ANDROID, "shortcutId");
         ShortcutInfo.Builder builder = new ShortcutInfo.Builder(mContext,shortcutId);
         String textId = xpp.getAttributeValue(NAMESPACE_ANDROID, "shortcutShortLabel");
@@ -115,6 +130,48 @@ public class ShortcutXMLParser {
             //ShortcutInfo and ShortcutInfo.Builder don't have a method to setEnabled :(
             //ignore.
         }
+
+        return builder;
+    }
+    protected ShortcutInfo.Builder parseItemAPI25(XmlResourceParser xpp) throws Exception{
+        //android.R.attr.shortcutId
+        final AttributeSet attrs = Xml.asAttributeSet(xpp);
+       Class styleable = Class.forName("com.android.internal.R$styleable");
+
+        styleable.getDeclaredField("ShortcutCategories").get(null);
+        String shortcutId =xpp.getAttributeValue(NAMESPACE_ANDROID, "shortcutId");
+        ShortcutInfo.Builder builder = new ShortcutInfo.Builder(mContext,shortcutId);
+
+
+        final TypedArray sa = mContext.getResources().obtainAttributes(attrs,
+                (int[])styleable.getDeclaredField("Shortcut").get(null));
+
+            if (sa.getType(styleable.getDeclaredField("Shortcut_shortcutId").getInt(null)) != TypedValue.TYPE_STRING) {
+                Log.w(TAG, "android:shortcutId must be string literal. activity=" );
+                return null;
+            }
+            final String id = sa.getNonResourceString(styleable.getDeclaredField("Shortcut_shortcutId").getInt(null));
+            final boolean enabled = sa.getBoolean(styleable.getDeclaredField("Shortcut_enabled").getInt(null), true);
+            final int iconResId = sa.getResourceId(styleable.getDeclaredField("Shortcut_icon").getInt(null), 0);
+            final int titleResId = sa.getResourceId(styleable.getDeclaredField("Shortcut_shortcutShortLabel").getInt(null), 0);
+            final int textResId = sa.getResourceId(styleable.getDeclaredField("Shortcut_shortcutLongLabel").getInt(null), 0);
+            final int disabledMessageResId = sa.getResourceId(
+                    styleable.getDeclaredField("Shortcut_shortcutDisabledMessage").getInt(null), 0);
+            if (TextUtils.isEmpty(id)) {
+                Log.w(TAG, "android:shortcutId must be provided. activity=" );
+                return null;
+            }
+            if (titleResId == 0) {
+                Log.w(TAG, "android:shortcutShortLabel must be provided. activity=" );
+                return null;
+            }
+
+        builder.setShortLabel(mContext.getString(titleResId));
+        if(textResId!=0)builder.setLongLabel(mContext.getString(textResId));
+        if(disabledMessageResId!=0)builder.setDisabledMessage(mContext.getString(disabledMessageResId));
+        builder.setIcon(Icon.createWithResource(mContext, iconResId));
+
+        sa.recycle();
 
         return builder;
     }

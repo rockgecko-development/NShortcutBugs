@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--suppress ALL -->
+
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/activity_preferences_debug">
      <PreferenceCategory android:key="pref_key_shortcut_1"
@@ -38,8 +38,14 @@
         <intent
             android:action="com.rockgecko.nshotcutbugs.ACTION_FROM_PREFERENCES"
             android:targetPackage="com.rockgecko.nshortcutbugs.flavour1"
-            android:targetClass="com.rockgecko.nshortcutbugs.SubActivity2" />
+            android:targetClass="com.rockgecko.nshortcutbugs.SubActivity2"
+            >
+            <!-- Android issue xx: lint incorrectly reports 'Element extra is not allowed here' -->
+            <extra android:name="extra_valid_key" android:value="valid value"/>
+            </intent>
     </Preference>
+
+
     <Preference
         android:key="main2_uri"
         android:enabled="true"
